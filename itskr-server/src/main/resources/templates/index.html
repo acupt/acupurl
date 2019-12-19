@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>四格 IT</title>
+</head>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery.form.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<body>
+<div id="topbar"></div>
+<div style="padding: 250px 35% 10px;">
+    <form id="surl-from" class="bs-example bs-example-form" role="form">
+        <div class="row">
+            <div class="input-group">
+                <input name="url" type="text" class="form-control" placeholder="输入目标网址，如: http://itskr.cn">
+                <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="生成短链接"/>
+                </span>
+            </div>
+        </div>
+    </form>
+    <div id="msg" style="padding-top: 20px;"> - - 测试版，数据随时清空</div>
+</div>
+</body>
+</html>
+
+<script>
+    $(function () {
+        $("#topbar").load("/topbar.html");
+        $('#surl-from').submit(function () {
+            $.ajax({
+                type: "POST",
+                url: "/surl/create",
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        document.getElementById("msg").innerText = result.data;
+                        document.getElementById("msg").style.color = "black";
+                    } else {
+                        document.getElementById("msg").innerText = result.msg;
+                        document.getElementById("msg").style.color = "red";
+                    }
+                },
+                error: function (xhr, status, e) {
+                    alert('登录异常,请刷新页面重试(' + status + ')');
+                }
+            });
+            return false;
+        });
+    });
+</script>

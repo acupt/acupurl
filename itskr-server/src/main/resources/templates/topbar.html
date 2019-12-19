@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<script src='/js/jquery-3.4.1.min.js'></script>
+<script src='/js/jquery.form.min.js'></script>
+<script src="/js/bootstrap.min.js"></script>
+<html>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">ITSKR</a>
+        </div>
+        <!--        <div th:if="${ctx!=null}">-->
+        <!--            <ul class="nav navbar-nav" th:each="nav : ${ctx.tea}">-->
+        <!--                <li><a href="##" th:href="${nav.uri}" th:text="${nav.title}">导航</a></li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
+        <!--        <div class="navbar-right">-->
+        <!--            <input style="position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;" id="myIp" th:value="${ctx.ip}">-->
+        <!--            <ul class="nav navbar-nav">-->
+        <!--                <li><a id="tip"></a></li>-->
+        <!--                <li><a href="##" th:text="${ctx.ip}" onclick="copyIp()">WTF</a></li>-->
+        <!--            </ul>-->
+        <!--            <ul class="nav navbar-nav" th:if="${ctx.logined}">-->
+        <!--                <li><a href="##" th:text="${ctx.user.nick}"></a></li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
+    </div>
+</nav>
+<script>
+    function copyIp() {
+        var ip = document.getElementById('myIp');
+        ip.select();
+        var done = document.execCommand('Copy');
+        if (done) {
+            showTip('you got it!');
+        } else {
+            showTip('ffffuck, you lose it!');
+        }
+    }
+
+    function showTip(tip) {
+        $('#tip').stop(true).text(tip).fadeIn(500).delay(1000).fadeOut(500);
+    }
+</script>
